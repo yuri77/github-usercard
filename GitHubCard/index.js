@@ -72,6 +72,27 @@ function createCard(data) {
   const following = document.createElement("p");
   const bio = document.createElement("p");
 
+  console.log(profile);
+  console.log(profileLink);
+
+  //set classname
+  card.classList.add("card");
+  avatar.src = data.avatar_url;
+  cardInfo.classList.add("card-info");
+  name.classList.add("name");
+  userName.classList.add("username");
+
+  //set content
+  profileLink.href = data.html_url;
+  name.textContent = `${data.name}`;
+  userName.textContent = `${data.login}`;
+  location.textContent = `Location: ${data.location}`;
+  profile.textContent = `Profile: `;
+  profileLink.textContent = `${data.html_url}`;
+  followers.textContent = `Followers: ${data.followers}`;
+  following.textContent = `Following: ${data.following}`;
+  bio.textContent = `Bio: ${data.bio}`;
+
   //set inheritance
   card.appendChild(avatar);
   card.appendChild(cardInfo);
@@ -83,23 +104,6 @@ function createCard(data) {
   cardInfo.appendChild(followers);
   cardInfo.appendChild(following);
   cardInfo.appendChild(bio);
-
-  //set classname
-  card.classList.add("card");
-  avatar.scr = data.avatar_url;
-  cardInfo.classList.add("card-info");
-  name.classList.add("name");
-  userName.classList.add("username");
-  profileLink.href = data.html_url;
-
-  //set content
-  name.textContent = `${data.name}`;
-  userName.textContent = `${data.login}`;
-  location.textContent = `Location: ${data.location}`;
-  profile.textContent = `Profile: ${data.html_url}`;
-  followers.textContent = `Followers: ${data.followers}`;
-  following.textContent = `Following: ${data.following}`;
-  bio.textContent = `Bio: ${data.bio}`;
 
   return card;
 }
