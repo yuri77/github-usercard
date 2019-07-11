@@ -3,10 +3,14 @@
            https://api.github.com/users/<your name>
 */
 
+const cards = document.querySelector(".cards");
+
 axios
   .get("https://api.github.com/users/yuri77")
-  .get(data => {
+  .then(data => {
     console.log("yuri77", data);
+    const yuriCard = createCard(data.data);
+    cards.appendChild(yuriCard);
   })
   .catch(error => {
     console.log("GitAPI is currently down", error);
@@ -54,6 +58,51 @@ const followersArray = [];
 </div>
 
 */
+function createCard(data) {
+  //create Elements
+  const card = document.createElement("div");
+  const avatar = document.createElement("img");
+  const cardInfo = document.createElement("div");
+  const name = document.createElement("h3");
+  const userName = document.createElement("p");
+  const location = document.createElement("p");
+  const profile = document.createElement("p");
+  const profileLink = document.createElement("a");
+  const followers = document.createElement("p");
+  const following = document.createElement("p");
+  const bio = document.createElement("p");
+
+  //set inheritance
+  card.appendChild(avatar);
+  card.appendChild(cardInfo);
+  cardInfo.appendChild(name);
+  cardInfo.appendChild(userName);
+  cardInfo.appendChild(location);
+  cardInfo.appendChild(profile);
+  profile.appendChild(profileLink);
+  cardInfo.appendChild(followers);
+  cardInfo.appendChild(following);
+  cardInfo.appendChild(bio);
+
+  //set classname
+  card.classList.add("card");
+  avatar.scr = data.avatar_url;
+  cardInfo.classList.add("card-info");
+  name.classList.add("name");
+  userName.classList.add("username");
+  profileLink.href = data.html_url;
+
+  //set content
+  name.textContent = `${data.name}`;
+  userName.textContent = `${data.login}`;
+  location.textContent = `Location: ${data.location}`;
+  profile.textContent = `Profile: ${data.html_url}`;
+  followers.textContent = `Followers: ${data.followers}`;
+  following.textContent = `Following: ${data.following}`;
+  bio.textContent = `Bio: ${data.bio}`;
+
+  return card;
+}
 
 /* List of LS Instructors Github username's: 
   tetondan
